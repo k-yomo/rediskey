@@ -44,7 +44,6 @@ func TestNewNamespace(t *testing.T) {
 	}
 }
 
-
 func TestNamespace_NewKey(t *testing.T) {
 	type fields struct {
 		Name   string
