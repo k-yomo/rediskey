@@ -31,6 +31,7 @@ func main()  {
 	key := rediskey.NewKey("session", "sess_id", redisKeyNameSpaceAuth)
 
 	ctx := context.Background()
+	// key.String() => "auth:session:sess_id"
 	err = redisClient.Set(ctx, key.String(), "value", 24 * time.Hour).Err()
 	if err != nil {
 		panic(err)
