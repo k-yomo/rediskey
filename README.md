@@ -34,7 +34,7 @@ func main()  {
 	if err != nil {
 		panic(err)
 	}
-	key := rediskey.NewKey("session", "sess_id", redisKeyNameSpaceAuth)
+	key := redisKeyNameSpaceAuth.NewKey("session", "sess_id")
 
 	ctx := context.Background()
 	// key.String() => "auth:session:sess_id"

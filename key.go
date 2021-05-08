@@ -21,6 +21,14 @@ func NewNamespace(name string, parent Marshaller) *Namespace {
 	}
 }
 
+func (n *Namespace) NewKey(objectType string, id string) *Key {
+	return &Key{
+		ObjectType: objectType,
+		ID:         id,
+		Parent:     n,
+	}
+}
+
 func (n *Namespace) marshal(b *bytes.Buffer) {
 	if n.Parent != nil {
 		n.Parent.marshal(b)

@@ -44,6 +44,55 @@ func TestNewNamespace(t *testing.T) {
 	}
 }
 
+
+func TestNamespace_NewKey(t *testing.T) {
+	type fields struct {
+		Name   string
+		Parent Marshaller
+	}
+	type args struct {
+		objectType string
+		id         string
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   *Key
+	}{
+		{
+			name: "initialize new key",
+			fields: fields{
+				Name:   "parent objectType",
+				Parent: nil,
+			},
+			args: args{
+				objectType: "objectType",
+				id:         "id",
+			},
+			want: &Key{
+				ObjectType: "objectType",
+				ID:         "id",
+				Parent: &Namespace{
+					Name:   "parent objectType",
+					Parent: nil,
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			n := &Namespace{
+				Name:   tt.fields.Name,
+				Parent: tt.fields.Parent,
+			}
+			if got := n.NewKey(tt.args.objectType, tt.args.id); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewKey() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestNewKey(t *testing.T) {
 	type args struct {
 		objectType string
