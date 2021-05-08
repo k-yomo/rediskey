@@ -5,7 +5,13 @@
 [![codecov](https://codecov.io/gh/k-yomo/rediskey/branch/main/graph/badge.svg)](https://codecov.io/gh/k-yomo/rediskey)
 [![Go Report Card](https://goreportcard.com/badge/k-yomo/rediskey)](https://goreportcard.com/report/k-yomo/rediskey)
 
-rediskey lets you organize redis key.
+rediskey lets you organize redis key in an officially recommended naming convention with document-oriented way.
+
+Officially recommended naming convention is following.
+> -  Very short keys are often not a good idea. There is little point in writing "u1000flw" as a key if you can instead write "user:1000:followers". The latter is more readable and the added space is minor compared to the space used by the key object itself and the value object. While short keys will obviously consume a bit less memory, your job is to find the right balance.
+> - Try to stick with a schema. For instance "object-type:id" is a good idea, as in "user:1000". Dots or dashes are often used for multi-word fields, as in "comment:1234:reply.to" or "comment:1234:reply-to".
+
+More details are written in [https://redis.io/topics/data-types-intro#redis-keys](https://redis.io/topics/data-types-intro#redis-keys).
 
 ## example
 ```go
