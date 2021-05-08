@@ -22,14 +22,17 @@ import (
 var redisKeyNameSpaceAuth = rediskey.NewNamespace("auth", nil)
 
 func main()  {
-	redisClient, err := redisutil.NewClient(&redis.Options{Addr: "localhost:6379"})
+	redisClient, err := redisutil.NewClient(&redis.Options{
+		Addr: "localhost:6379",
+	})
 	if err != nil {
 		panic(err)
 	}
 	key := rediskey.NewKey("session", "sess_id", redisKeyNameSpaceAuth)
 
 	ctx := context.Background()
-	if err := redisClient.Set(ctx, key.String(), "value", 24 * time.Hour).Err(); err != nil {
+	err = redisClient.Set(ctx, key.String(), "value", 24 * time.Hour).Err()
+	if err != nil {
 		panic(err)
 	}
 }
